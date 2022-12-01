@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 30,
+    padding: 20,
     margin: 2,
     borderColor: '#2a4944',
     borderWidth: 1,
@@ -128,27 +128,32 @@ const Home = () => {
 
         </View>
         <View style={[{ top: 50 }]}>
-          <View style={{marginTop:10,marginBottom:10}}>
+          <View style={{ marginTop: 10, marginBottom: 10 }}>
             <SearchBar
               placeholder="Tìm menu"
-              onChangeText={e=>updateSearch(e)}
+              onChangeText={e => updateSearch(e)}
               value={search}
               lightTheme={true}
             />
           </View>
           <ScrollView>
-            {
-              names.map((item, index) => (
-                <View key={item.id} style={styles.item}
-
-                >
-                  <Text onPress={() => alert('Bạn chọn: ' + item.name + '🍎')}>{(index + 1) + '.' + item.name}🍎</Text>
-                </View>
-              ))
-            }
+            <View>
+              {
+                names.filter(k => k?.name.toLowerCase().includes(String(search).toLowerCase())).map((item, index) => (
+                  <View 
+                  key={item.id} 
+                  style={styles.item}
+                  >
+                    <Text onPress={() => alert('Bạn chọn: ' + item.name + '🍎')}>{(index + 1) + '.' + item.name}🍎</Text>
+                  </View>
+                ))
+              }
+            </View>
           </ScrollView>
         </View>
-        <View style={[{ top: 50 }]}>
+        <View 
+        style={[{ top: 50 }]}
+        >
 
           <Modal
             animationType={"slide"}
